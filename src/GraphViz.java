@@ -71,13 +71,13 @@ public class GraphViz {
 	   {
 	      File dot;
 	      byte[] img_stream = null;
-	   
+
 	      try {
 	         dot = writeDotSourceToFile(dot_source);
 	         if (dot != null)
 	         {
 	            img_stream = get_img_stream(dot, type);
-	            if (dot.delete() == false) 
+	            if (dot.delete() == false)
 	               System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
 	            return img_stream;
 	         }
@@ -128,11 +128,11 @@ public class GraphViz {
 	try {
 	         img = File.createTempFile("graph_", "."+type, new File(GraphViz.TEMP_DIR));
 	         Runtime rt = Runtime.getRuntime();
-	         
+
 	         // patch by Mike Chenault
 	         String[] args = {DOT, "-T"+type, dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
 	         Process p = rt.exec(args);
-	         
+
 	         p.waitFor();
 
 	FileInputStream in = new FileInputStream(img.getAbsolutePath());
@@ -141,7 +141,7 @@ public class GraphViz {
 	         // Close it if we need to
 	         if( in != null ) in.close();
 
-	if (img.delete() == false) 
+	if (img.delete() == false)
 	            System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
 	      }
 	      catch (java.io.IOException ioe) {
@@ -174,7 +174,7 @@ public class GraphViz {
 	         System.err.println("Error: I/O error while writing the dot source to temp file!");
 	         return null;
 	      }
-	      return temp;
+	      return temp;//·µ»Øtemp
 	   }
 
 	/**
@@ -195,14 +195,14 @@ public class GraphViz {
 
 	/**
 	    * Read a DOT graph from a text file.
-	    * 
+	    *
 	    * @param input Input text file containing the DOT graph
 	    * source.
 	    */
 	   public void readSource(String input)
 	   {
 	    StringBuilder sb = new StringBuilder();
-	    
+
 	    try
 	    {
 	     FileInputStream fis = new FileInputStream(input);
@@ -213,11 +213,11 @@ public class GraphViz {
 	      sb.append(line);
 	     }
 	     dis.close();
-	    } 
+	    }
 	    catch (Exception e) {
 	     System.err.println("Error: " + e.getMessage());
 	    }
-	    
+
 	    this.graph = sb;
 	   }
 }
