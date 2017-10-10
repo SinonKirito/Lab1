@@ -47,7 +47,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;    
+import org.eclipse.swt.graphics.GC;
 
 public class main extends ApplicationWindow {
 	private Text text;
@@ -114,7 +114,7 @@ public class main extends ApplicationWindow {
 				System.out.println(path);
 				try {
 					//根据读取路径建立有向图
-					
+
 					graph = new DGraph(path);
 					graph.showDirectedGraph("jpg");
 				} catch (Exception e1) {
@@ -128,7 +128,7 @@ public class main extends ApplicationWindow {
 			}
 		});
 		readfile.setText("\u786E\u5B9A");
-		
+
 //建立透明按钮，实现展示有向图
 		Label labShowGraph = new Label(container, SWT.NONE);
 		//设置透明按钮
@@ -141,7 +141,7 @@ public class main extends ApplicationWindow {
 			}
 		});
 		labShowGraph.setBounds(35, 146, 313, 62);
-		
+
 		//建立透明按钮，查询桥接词
 		Label labBrid = new Label(container, SWT.NONE);
 		labBrid.setImage(SWTResourceManager.getImage("\u67E5\u8BE2\u6865\u63A5\u8BCD.png"));
@@ -153,7 +153,7 @@ public class main extends ApplicationWindow {
 			}
 		});
 		labBrid.setBounds(35, 205, 313, 66);
-		
+
 		//建立透明按钮，生成桥接词文章
 		Label labBridgeArtcle = new Label(container, SWT.NONE);
 		labBridgeArtcle.setImage(SWTResourceManager.getImage("\u751F\u6210\u6865\u63A5\u8BCD\u6587\u7AE0.png"));
@@ -165,7 +165,7 @@ public class main extends ApplicationWindow {
 			}
 		});
 		labBridgeArtcle.setBounds(36, 265, 313, 66);
-		
+
 		//建立透明按钮，实现随机游走
 		Label labRandomWalk = new Label(container, SWT.NONE);
 		labRandomWalk.setImage(SWTResourceManager.getImage("\u968F\u673A\u6E38\u8D70.png"));
@@ -177,7 +177,7 @@ public class main extends ApplicationWindow {
 			}
 		});
 		labRandomWalk.setBounds(35, 388, 313, 62);
-		
+
 
 		//建立透明按钮，实现最短路查询
 		Label labShortestPath = new Label(container, SWT.NONE);
@@ -189,9 +189,9 @@ public class main extends ApplicationWindow {
 			}
 		});
 		labShortestPath.setBounds(35, 327, 313, 62);
-		
-		
-		return container;
+
+
+		return container;//返回container
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class main extends ApplicationWindow {
 		// Create the actions
 	}
 
-	
+
 	@Override
 	protected StatusLineManager createStatusLineManager() {
 		StatusLineManager statusLineManager = new StatusLineManager();
@@ -249,7 +249,7 @@ public class main extends ApplicationWindow {
 		Shell ShowGraph = new Shell(SWT.DIALOG_TRIM);
 		ShowGraph.setText("展示有向图");
 		ShowGraph.setLayout(new FillLayout());
-		
+
 //		读取图片
 		try {
 			org.eclipse.swt.graphics.Image img = new org.eclipse.swt.graphics.Image(Display.getCurrent(), "c:/temp/out.jpg");
@@ -269,7 +269,7 @@ public class main extends ApplicationWindow {
 	                     origin.x = -hSelection;
 	                     System.out.println("HBar listener exit");
 	                 }
-					
+
 	             });
 	        final ScrollBar vBar = canvas.getVerticalBar ();
 	            vBar.setMaximum(ShowGraph.getBounds().width);
@@ -297,7 +297,7 @@ public class main extends ApplicationWindow {
 	        dialog.setMessage("找不到有向图");
 	        dialog.open();
 		}
-		
+
 	}
 	//查询桥接词
 	protected void BWShell() {
@@ -430,7 +430,7 @@ public class main extends ApplicationWindow {
 	        dialog.setMessage("未生成有向图");
 	        dialog.open();
 		}
-		
-		
+
+
 	}
 }
