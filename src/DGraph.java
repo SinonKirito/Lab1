@@ -26,7 +26,7 @@ public class DGraph {
 	//邻接表顶点
 	private class VNode{
 		String word;//节点代表字母
-		ENode firstEdge;
+		ENode firstEdge;//节点的第一条邻边
 	}
 
 	//最短路各节点距离
