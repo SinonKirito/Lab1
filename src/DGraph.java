@@ -31,7 +31,7 @@ public class DGraph {
 
 	//最短路各节点距离
 	private class Node{
-		int id;
+		int id;//节点编号
 		int cost = 100000;
 	}
 

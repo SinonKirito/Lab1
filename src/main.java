@@ -116,7 +116,7 @@ public class main extends ApplicationWindow {
 					//根据读取路径建立有向图
 
 					graph = new DGraph(path);
-					graph.showDirectedGraph("jpg");
+					graph.showDirectedGraph("jpg");//设置图片属性
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
