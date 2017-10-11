@@ -59,7 +59,7 @@ public class main extends ApplicationWindow {
 	public main() {
 		super(null);
 		setShellStyle(SWT.DIALOG_TRIM);
-		createActions();
+		createActions();//´´½¨action
 		addToolBar(SWT.FLAT | SWT.WRAP);
 		addMenuBar();
 		addStatusLine();
