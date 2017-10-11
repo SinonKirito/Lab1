@@ -51,7 +51,7 @@ import org.eclipse.swt.graphics.GC;
 
 public class main extends ApplicationWindow {
 	private Text text;
-	private DGraph graph;
+	private DGraph graph;//”–œÚÕº¿‡
 
 	/**
 	 * Create the application window.
