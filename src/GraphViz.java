@@ -37,7 +37,7 @@ public class GraphViz {
 	    * @return Source of the graph in dot language.
 	    */
 	   public String getDotSource() {
-	      return graph.toString();
+	      return graph.toString();//·µ»Ø
 	   }
 
 	/**
