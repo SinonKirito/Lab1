@@ -22,25 +22,25 @@ public class DGraph {
 		//boolean known;
 		ENode nextEdge;
 	}
-	
+
 	//邻接表顶点
 	private class VNode{
 		String word;
-		ENode firstEdge;
+		ENode firstEdge;//节点的第一条邻边
 	}
-	
+
 	//最短路各节点距离
 	private class Node{
 		int id;
 		int cost = 100000;
 	}
-	
+
 	//private static String[] context; //?
 	private static ArrayList<String> context = new ArrayList<String>();
 	private int vlen;
 	private int elen;
 	private ArrayList<VNode> Vlist = new ArrayList<VNode>();
-	
+
 	//按字符读取文件
 	public  static int readFileByChars(String filePath) {
         int i = 0;
@@ -79,9 +79,9 @@ public class DGraph {
 		}
 		return i;
     }
-	
+
 	//DGraph类自建函数
-	public DGraph(String filePath) throws Exception {		
+	public DGraph(String filePath) throws Exception {
 		int i = 0;
 		vlen = 1;
 		VNode node;
@@ -107,7 +107,7 @@ public class DGraph {
 			}
 			i++;
 		}
-		
+
 		for(i = 0;i<elen;i++) {
 			String s1 = context.get(i);
 			String s2 = context.get(i+1);
@@ -157,9 +157,9 @@ public class DGraph {
 					}
 				}
 			}
-		}      
+		}
 	}
-	
+
 	//获取桥接词
 	public String queryBridgeWords(String word1, String word2) {
 		int p1,p2;//两个单词在点表中对应的位置编号
@@ -184,7 +184,7 @@ public class DGraph {
 			result = result + "No " + word1 + " or " + word2 + " in the graph!";
 			return result;
 		}
-		
+
 		for(ENode bridge=Vlist.get(p1).firstEdge;bridge!=null;bridge=bridge.nextEdge) {
 			for(ENode node=Vlist.get(bridge.num).firstEdge;node!=null;node=node.nextEdge) {
 				if(p2 == node.num) {
@@ -214,7 +214,7 @@ public class DGraph {
 		}
 		return result;
 	}
-	
+
 	//通过桥接词生成新文本
 	public String generateNewText(String inputText) {
 		String reg1 = "\\s+";//s表示空格、回车、换行等空白符
@@ -269,7 +269,7 @@ public class DGraph {
 		newText = newText + str[wordsNum-1];
 		return newText;
 	}
-	
+
 	//输入两个单词获取最短路，展示所有长度最短的路径
 	public String calcShortestPath(String word1,String word2){
 		String result = new String();
@@ -284,12 +284,12 @@ public class DGraph {
 				break;
 			}
 		}
-		
+
 		if(p1>=vlen || p2>=vlen) {//判断两个单词是否都在有向图上
 			result = "不可达";
 			return result;
 		}
-		
+
 		//利用dijsktra求最短路
 		int[][] path = new int[vlen][vlen];//路径父节点
 		int[] visit = new int[vlen];
@@ -304,7 +304,7 @@ public class DGraph {
 			}
 			visit[i] = 0;
 		}
-		
+
 		Comparator<Node> orderIsdn = new Comparator<Node>() {
 
 			@Override
@@ -321,10 +321,10 @@ public class DGraph {
 					return 0;
 				}
 			}
-			
+
 		};
 		Queue<Node> priorityQueue = new PriorityQueue<Node>(orderIsdn);
-		
+
 		dist.get(p1).cost = 0;
 		priorityQueue.add(dist.get(p1));
 		while(!priorityQueue.isEmpty()) {
@@ -370,13 +370,13 @@ public class DGraph {
 			result = "不可达";
 			return result;
 		}
-		
+
 		StringBuilder tempstring = new StringBuilder("");
 		getSinglePath(p2,tempstring,"",path,p2);
 		result = tempstring.toString().trim();
 		return result;
 	}
-	
+
 	//递归函数，利用父节点数组求两点间所有最短路径
 	public void getSinglePath(int index,StringBuilder s,String locS,int path[][],int end) {
 		for(int i=0;i<vlen;i++) {
@@ -393,10 +393,10 @@ public class DGraph {
 			else
 			{
 				getSinglePath(path[index][i],s,Vlist.get(index).word + "->" + locS,path,end);
-			}			
+			}
 		}
 	}
-	
+
 	//输入一个单词,求一个点到其余能到达点的最短路
 	public String calcShortestPath(String word) {
 		String result = new String();
@@ -406,12 +406,12 @@ public class DGraph {
 				break;
 			}
 		}
-		
+
 		if(p>=vlen) {//该点在有向图中不存在
 			result = "不可达";
 			return result;
 		}
-		
+
 		int[] path = new int[vlen];//父节点
 		int[] visit = new int[vlen];
 		ArrayList<Node> dist = new ArrayList<Node>();
@@ -423,7 +423,7 @@ public class DGraph {
 			path[i] = -1;
 			visit[i] = 0;
 		}
-		
+
 		Comparator<Node> orderIsdn = new Comparator<Node>() {
 
 			@Override
@@ -440,7 +440,7 @@ public class DGraph {
 					return 0;
 				}
 			}
-			
+
 		};
 		Queue<Node> priorityQueue = new PriorityQueue<Node>(orderIsdn);
 		//利用优先队列实现dijsktra算法
@@ -482,19 +482,19 @@ public class DGraph {
 			}
 			result = result + Vlist.get(i).word + "\n";
 		}
-		
+
 		return result;
 	}
-	
+
 	//生成随机路径
 	public String randomWalk() {
-		
+
 		ENode edge;
 		ENode foreEdge;
 		GraphViz gv = new GraphViz();
 		gv.addln(gv.start_graph());
 		int Path[] = new int[1000];
-	      
+
 		double p;
 		int startIndex;
 		int index = 1;
@@ -536,11 +536,11 @@ public class DGraph {
 				edge = edge.nextEdge;
 			}
 		}
-		
+
 		for(int i=0;i<index;i++) {
 			System.out.println(Path[i]);
 		}
-		
+
 	    //起始节点填充颜色标明
 		gv.addln(Vlist.get(Path[0]).word+"[style=\"filled\",fillcolor=\"chartreuse\"];");
 		for(int i = 0;i<vlen;i++) {
@@ -559,23 +559,23 @@ public class DGraph {
 	    		  }
 	    		  if(flag == 1) {//不是随机路径的边仍为黑色
 	    			   gv.addln(p1+" -> "+p2+"[label="+cost+"]"+";");
-	    		  }	
+	    		  }
 	    		  else if(flag == 0) {//随机路径的边用绿色标明
 	    			   gv.addln(p1+" -> "+p2+"[label="+cost+","+"color=\"yellowgreen\""+"]"+";");
 	    		  }
 	    		  edge = edge.nextEdge;
 	    	  }
 	      }
-		
+
 	    gv.addln(gv.end_graph());
 	    System.out.println(gv.getDotSource());
-	      
+
 	    File out = new File("c:/temp/randomPath." + "jpg");    // 在指定路径生成有向图jpg文件
 	    gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), "jpg" ), out );
-		
+
 		return s;
 	}
-	
+
 	//展示生成的有向图
 	public void showDirectedGraph(String type)
 	   {
@@ -594,7 +594,7 @@ public class DGraph {
 	      }
 	      gv.addln(gv.end_graph());
 	      System.out.println(gv.getDotSource());
-	      
+
 	      File out = new File("c:/temp/out." + type);    // 在指定路径生成有向图jpg文件
 	      gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
 	   }
